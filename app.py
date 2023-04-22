@@ -4,6 +4,7 @@ from nltk.stem import WordNetLemmatizer
 lemmatizer = WordNetLemmatizer()
 import pickle
 import numpy as np
+import pyttsx3
 
 from keras.models import load_model
 model = load_model('model.h5')
@@ -61,6 +62,11 @@ def getResponse(ints, intents_json):
 def chatbot_response(msg):
     ints = predict_class(msg, model)
     res = getResponse(ints, intents)
+    engine=pyttsx3.init()
+    ints=predict_class(msg,model)
+    res=getResponse(ints, intents)
+    engine.say(res)
+    engine.runAndWait()
     return res
 
 
